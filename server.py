@@ -26,11 +26,11 @@ def main():
             if not data:
                 print('empty string received!')
             else:
-                print(f'data received form the client {data}')
+                print(f'data received from the client {data}')
             
-            print('connection closed')
+        print('connection closed')
         
-        print('socket closed')
+    print('socket closed')
     
 
 
