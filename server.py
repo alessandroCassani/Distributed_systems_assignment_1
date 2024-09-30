@@ -22,7 +22,7 @@ def main():
         print('new connection established!')
         
         with conn:
-            data = conn.recv(1024)
+            data = conn.recv(1024).decode()
             if not data:
                 print('empty string received!')
             else:
