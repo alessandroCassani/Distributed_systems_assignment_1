@@ -28,6 +28,7 @@ def main():
                 print(f'data received from the client: {data}')
             
             conn.sendall('server response'.encode())
+            print('server response sent')
             
         print('connection closed')
         
