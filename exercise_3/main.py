@@ -4,8 +4,7 @@ import random
 
 def main():
     
-    for in in range
-    t1 = threading.Thread(target=greet_sleep_farewell,args=(1,))
+    t1 = threading.Thread(target=greet_sleep_farewell,args=(1,id))
     t2 = threading.Thread(target=greet_sleep_farewell,args=(2,))
     t3 = threading.Thread(target=greet_sleep_farewell,args=(3,))
     
@@ -18,10 +17,10 @@ def main():
     t3.join()
     
 def greet_sleep_farewell(id):
-        
     print('Hi!, Im thread {}'.format(id))
-    time.sleep(random.randint(1,10))
-    print('thread {} is saying you goodbye!'.format(id))
+    sleeping_time = random.randint(1,10)
+    time.sleep(sleeping_time)
+    print('thread {} is saying you goodbye after sleeping for {} seconds!'.format(id, sleeping_time))
          
          
 if __name__ == "__main__":
