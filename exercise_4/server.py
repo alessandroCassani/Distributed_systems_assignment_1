@@ -20,11 +20,10 @@ def main():
         
         while(True):
             conn, addr = s.accept()
-            thread = threading.Thread(target=handle_connection)
+            thread = threading.Thread(target=handle_connection, args=(conn,)))
             thread.start()
             
             
-    
 def handle_connection(conn):
     while(True):
         data = conn.recv(1024).decode()
