@@ -28,12 +28,12 @@ def main():
 def handle_connection(conn):
     while(True):
         data = conn.recv(1024).decode()
-        print(f'thread {threading.current_thread.name()} received following message: {data}')
+        print(f'thread {threading.current_thread().name} received following message: {data}')
 
         if data == 'end':
             break
         else:
-            conn.sendAll(f'response from  {threading.current_thread.name()}').encode()
+            conn.sendall(f'response from  {threading.current_thread().name}').encode()
         
 
 if __name__ == "__main__":
