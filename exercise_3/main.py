@@ -4,7 +4,7 @@ import random
 
 def main():
     
-    t1 = threading.Thread(target=greet_sleep_farewell,args=(1,id))
+    t1 = threading.Thread(target=greet_sleep_farewell,args=(1,))
     t2 = threading.Thread(target=greet_sleep_farewell,args=(2,))
     t3 = threading.Thread(target=greet_sleep_farewell,args=(3,))
     
