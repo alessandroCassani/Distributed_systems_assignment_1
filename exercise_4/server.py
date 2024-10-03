@@ -2,12 +2,11 @@ import threading
 import socket
 from sys import argv
 
-
+HOST = "0.0.0.0"
+DEFAULT_PORT = 8080
+END_MESSAGE = 'end'
 
 def main():
-    HOST = "0.0.0.0"
-    DEFAULT_PORT = 8080
-    
     try:
         port = int(argv[1])
     except:
@@ -20,8 +19,9 @@ def main():
         
         while(True):
             conn, addr = s.accept()
-            thread = threading.Thread(target=handle_connection, args=(conn,)))
-            thread.start()
+            with conn:
+                thread = threading.Thread(target=handle_connection, args=(conn,))
+                thread.start()
             
             
 def handle_connection(conn):
@@ -29,10 +29,10 @@ def handle_connection(conn):
         data = conn.recv(1024).decode()
         print(f'thread {threading.current_thread().name} received following message: {data}')
 
-        if data == 'end':
+        if data == END_MESSAGE:
             break
         else:
-            conn.sendall(f'response from  {threading.current_thread().name}').encode()
+            conn.sendall(f'response from  {threading.current_thread().name}'.encode())
         
 
 if __name__ == "__main__":
