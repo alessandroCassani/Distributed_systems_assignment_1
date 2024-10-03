@@ -14,8 +14,9 @@ def main():
         port = DEFAULT_PORT
     
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind(HOST,port)
+        s.bind((HOST,port))
         s.listen()
+        print(f'server listening on port {port}...')
         
         while(True):
             conn, addr = s.accept()
