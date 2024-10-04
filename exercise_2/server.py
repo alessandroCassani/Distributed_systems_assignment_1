@@ -20,21 +20,17 @@ def main():
         conn, addr = s.accept()
         print('new connection established!')
         
-        with conn:
-            data = conn.recv(1024).decode()
-            if not data:
-                print('empty string received!')
-            else:
-                print(f'data received from the client: {data}')
+        data = conn.recv(1024).decode()
+        if not data:
+            print('empty string received!')
+        else:
+            print(f'data received from the client: {data}')
             
-            conn.sendall('server response'.encode())
-            print('server response sent')
-            
-        print('connection closed')
+        conn.sendall('server response'.encode())
+        print('server response sent')
         
     print('socket closed')
     
-
 
 if __name__ == "__main__":
     main()
