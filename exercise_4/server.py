@@ -29,7 +29,7 @@ def handle_connection(conn):
         print(f'server {threading.current_thread().name} received following message: {data}')
 
         if data == END_MESSAGE:
-            print(f' server {threading.current_thread().name} has received end message, closing!')
+            print(f'server {threading.current_thread().name} has received end message, closing!')
             break
         else:
             conn.sendall(f'response from server {threading.current_thread().name}'.encode())
