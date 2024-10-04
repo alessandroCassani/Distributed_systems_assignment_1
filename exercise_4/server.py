@@ -19,15 +19,14 @@ def main():
         
         while(True):
             conn, addr = s.accept()
-            with conn:
-                thread = threading.Thread(target=handle_connection, args=(conn,))
-                thread.start()
+            thread = threading.Thread(target=handle_connection, args=(conn,))
+            thread.start()
             
             
 def handle_connection(conn):
     while(True):
         data = conn.recv(1024).decode()
-        print(f'thread {threading.current_thread().name} received following message: {data}')
+        print(f'server {threading.current_thread().name} received following message: {data}')
 
         if data == END_MESSAGE:
             break
