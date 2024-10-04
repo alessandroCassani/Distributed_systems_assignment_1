@@ -3,18 +3,18 @@ import time
 import random
 
 def main():
+    threads = []
     
-    t1 = threading.Thread(target=greet_sleep_farewell,args=(1,))
-    t2 = threading.Thread(target=greet_sleep_farewell,args=(2,))
-    t3 = threading.Thread(target=greet_sleep_farewell,args=(3,))
-    
-    t1.start()
-    t2.start()
-    t3.start()
-    
-    t1.join()
-    t2.join()
-    t3.join()
+    for i in range(3):
+        thread = threading.Thread(target=greet_sleep_farewell,args=(i,))
+        threads.append(thread)
+
+    for i in range(3):
+        threads[i].start()
+        
+    for i in range(3):
+        threads[i].join()
+        
     
 def greet_sleep_farewell(id):
     print('Hi!, Im thread {}'.format(id))
