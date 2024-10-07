@@ -27,9 +27,10 @@ def connect():
         s.sendall(message.encode())
         
         server_response = s.recv(1024).decode()
-        print(f'server response received: {server_response}')
+        print(f'{threading.current_thread().name} received server response: {server_response}')
         
         sleeping_time = random.randint(1,5)
+        print(f'{threading.current_thread().name} sleeping for {sleeping_time} seconds...')
         time.sleep(sleeping_time)
         
         s.sendall(END_MESSAGE.encode())

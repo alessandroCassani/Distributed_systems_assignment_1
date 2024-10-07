@@ -18,19 +18,18 @@ def main():
         
         print("Waiting for a client...")
         conn, addr = s.accept()
-        print('new connection established!')
         
-        data = conn.recv(1024).decode()
-        if not data:
-            print('empty string received!')
-        else:
-            print(f'data received from the client: {data}')
+        with conn:
+            print('new connection established!')
+        
+            data = conn.recv(1024).decode()
+            print(f'data received Client {addr}: {data}')
             
-        conn.sendall('server response'.encode())
-        print('server response sent')
+            conn.sendall('server response'.encode())
+            print('server response sent')
         
-    print('socket closed')
+        print('connection closed')
     
-
+    
 if __name__ == "__main__":
     main()

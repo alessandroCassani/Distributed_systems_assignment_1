@@ -9,17 +9,19 @@ def main():
         thread = threading.Thread(target=greet_sleep_farewell,args=(i,))
         threads.append(thread)
 
-    for i in range(3):
-        threads[i].start()
+    for thread in threads:
+        thread.start()
         
-    for i in range(3):
-        threads[i].join()
+    for thread in threads:
+        thread.join()
         
     
 def greet_sleep_farewell(id):
-    print('Hi!, Im thread {}'.format(id))
+    print(f'Hi!, Im thread {id}')
+    
     sleeping_time = random.randint(1,10)
     time.sleep(sleeping_time)
+    
     print('thread {} is saying you goodbye after sleeping for {} seconds!'.format(id, sleeping_time))
          
          
