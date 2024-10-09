@@ -8,32 +8,27 @@ SERVER_PORT = 8080
 END_MESSAGE = 'end'
     
 def main():
-    n = input('select the number of clients to launch \n')
-    create_client_threads(int(n))
-    
-      
-def create_client_threads(n):
-    for i in range(n):
-        thread = threading.Thread(target=connect)
-        thread.start()      
-     
-        
-def connect():
+    create_client()
+            
+def create_client():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        message_counter = random.randint(1,4)
         s.connect((SERVER_ADDRESS,SERVER_PORT))
-        print(f'client {threading.current_thread().name} connected!') 
+        print(f'client connected!') 
         
-        message = f'message sent from client {threading.current_thread().name}'
-        s.sendall(message.encode())
-        
-        server_response = s.recv(1024).decode()
-        print(f'{threading.current_thread().name} received server response: {server_response}')
+        for i in range(message_counter):
+            message = f'message number {i}'
+            s.sendall(message.encode())
+            
+            server_response = s.recv(1024).decode()
+            print(f'received server response: {server_response}')
         
         sleeping_time = random.randint(1,5)
-        print(f'{threading.current_thread().name} sleeping for {sleeping_time} seconds...')
+        print(f'sleeping for {sleeping_time} seconds...')
         time.sleep(sleeping_time)
         
         s.sendall(END_MESSAGE.encode())
+        print('closing!')
         
        
 if __name__ == '__main__':
