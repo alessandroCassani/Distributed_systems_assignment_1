@@ -12,13 +12,14 @@ def main():
             
 def create_client():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        message_counter = random.randint(1,4)
+        message_counter = random.randint(2,4)
         s.connect((SERVER_ADDRESS,SERVER_PORT))
         print(f'client connected!') 
         
         for i in range(message_counter):
             message = f'message number {i}'
             s.sendall(message.encode())
+            print(f'message {i} sent')
             
             server_response = s.recv(1024).decode()
             print(f'received server response: {server_response}')
