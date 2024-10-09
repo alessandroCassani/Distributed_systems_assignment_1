@@ -1,7 +1,6 @@
 import socket
 from sys import argv
 
-
 def main():
     HOST = "0.0.0.0"
     DEFAULT_PORT = 8080
@@ -27,7 +26,6 @@ def main():
         
         print('Connection closed')
     
-
 
 if __name__ == "__main__":
     main()
