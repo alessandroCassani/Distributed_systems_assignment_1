@@ -12,23 +12,19 @@ def main():
             
 def create_client():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        message_counter = random.randint(2,4)
         s.connect((SERVER_ADDRESS,SERVER_PORT))
         print(f'client connected!') 
         
-        for i in range(message_counter):
-            message = f'message number {i}'
+        while(True):
+            message = input("insert message to send to the server, otherwhise send 'end' string \n")
             s.sendall(message.encode())
-            print(f'message {i} sent')
+            
+            if message.lower() == END_MESSAGE:
+                break
             
             server_response = s.recv(1024).decode()
             print(f'received server response: {server_response}')
-        
-        sleeping_time = random.randint(1,5)
-        print(f'sleeping for {sleeping_time} seconds...')
-        time.sleep(sleeping_time)
-        
-        s.sendall(END_MESSAGE.encode())
+
         print('closing!')
         
        

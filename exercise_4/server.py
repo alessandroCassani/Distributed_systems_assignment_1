@@ -19,23 +19,24 @@ def main():
         
         while(True):
             conn, addr = s.accept()
-            print(f"New connection from {addr} \n")
+            print(f"New connection from {addr}")
             
-            thread = threading.Thread(target=handle_connection, args=(conn,))
+            thread = threading.Thread(target=handle_connection, args=(conn,addr))
             thread.start()
             
             
-def handle_connection(conn):
+def handle_connection(conn,addr):
+    thread_name = threading.current_thread().name
     with conn:
         while True:
             data = conn.recv(1024).decode()
-            print(f'server {threading.current_thread().name} received following message: {data}')
+            print(f'server {thread_name} received following message from {addr}: {data}')
 
             if data == END_MESSAGE:
-                print(f'server {threading.current_thread().name} closing connection...')
+                print(f'server {thread_name} closing connection...')
                 break
             else:
-                response = f'response from server {threading.current_thread().name}'
+                response = f'response from server {thread_name}'
                 conn.sendall(response.encode())
         
 
